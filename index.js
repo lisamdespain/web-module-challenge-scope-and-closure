@@ -36,7 +36,7 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
 */
 
 // counter1 code: function inside a function. Counter function is looking outside its scope for count
-//I believe this is the one with closure.
+// This is the one with closure. Many little buckets & want to keep track & update separately
 function counterMaker() {
   let count = 0;
   return function counter() {
@@ -46,7 +46,7 @@ function counterMaker() {
 
 const counter1 = counterMaker();
 
-// counter2 code: count exists in the global environment
+// counter2 code: good enough if you don't need to update the variable
 let count = 0;
 
 function counter2() {
@@ -83,29 +83,35 @@ Use the finalScore function below to do the following:
 */ 
 
 function finalScore(getInning,numInnings){
-  let homeScore = function getHomeScore(getInning){
+  let homeScore = 0;
+  let awayScore = 0;
     for (let i = 0; i < numInnings; i++){
-      homeScore = homeScore + getInning;
+      homeScore = homeScore + getInning();
+      awayScore = awayScore + getInning();
   }
-}
-  let awayScore = function getAwayScore(getInning){
-    for (let i = 0; i < numInnings; i++){
-      awayScore = awayScore + getInning;
+  return {
+    Home: homeScore,
+    Away: awayScore
   }
-    
   }
-  return console.log('Home: ' + homeScore, 'Away: ' + awayScore);
-}
-console.log(inning,9);
+console.log(finalScore(inning,9));
+
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(getInningCounter) {
+  let homeScore = 0;
+  let awayScore = 0;
+  homeScore = getInningCounter();
+  awayScore = getInningCounter();
+  return {
+    Home: homeScore,
+    Away: awayScore
+  }
 }
-
+console.log(getInningScore(inning));
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
