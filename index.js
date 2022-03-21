@@ -35,7 +35,8 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
      counter2 be better?  
 */
 
-// counter1 code
+// counter1 code: function inside a function. Counter function is looking outside its scope for count
+//I believe this is the one with closure.
 function counterMaker() {
   let count = 0;
   return function counter() {
@@ -45,7 +46,7 @@ function counterMaker() {
 
 const counter1 = counterMaker();
 
-// counter2 code
+// counter2 code: count exists in the global environment
 let count = 0;
 
 function counter2() {
@@ -62,10 +63,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  return Math.floor(Math.random() * 3);
 }
-
+console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -81,10 +82,21 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(getInning,numInnings){
+  let homeScore = function getHomeScore(getInning){
+    for (let i = 0; i < numInnings; i++){
+      homeScore = homeScore + getInning;
+  }
 }
-
+  let awayScore = function getAwayScore(getInning){
+    for (let i = 0; i < numInnings; i++){
+      awayScore = awayScore + getInning;
+  }
+    
+  }
+  return console.log('Home: ' + homeScore, 'Away: ' + awayScore);
+}
+console.log(inning,9);
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
