@@ -158,8 +158,9 @@ function scoreboard(inningScoreCB, inningCB, numInnings) {
   const game = [];
   let homeScore = 0;
   let awayScore = 0;
+  let currentInning = 0;
   for (let i = 0; i < numInnings; i++){
-    const currentInning = inningScoreCB(inningCB);
+    currentInning = inningScoreCB(inningCB);
     homeScore = homeScore + currentInning.Home;
     awayScore = awayScore + currentInning.Away;
     game.push(`Inning ${i + 1}: Away ${currentInning.Away} - Home ${currentInning.Home}`);
